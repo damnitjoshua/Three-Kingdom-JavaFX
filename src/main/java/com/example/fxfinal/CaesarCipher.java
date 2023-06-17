@@ -3,8 +3,44 @@ package com.example.fxfinal;
 public class CaesarCipher {
     private int shift;
 
-    public CaesarCipher() {
-        shift = 7;
+    public CaesarCipher(int shift) {
+        this.shift = shift;
+    }
+
+    public String encrypt(String message) {
+        StringBuilder encrypted = new StringBuilder();
+
+        for (int i = 0; i < message.length(); i++) {
+            char ch = message.charAt(i);
+            if (Character.isLetter(ch)) {
+                if (Character.isUpperCase(ch)) {
+                    encrypted.append('^');
+                    ch = Character.toLowerCase(ch);
+                }
+                char shifted = (char) ((ch - 'a' + shift) % 26 + 'a');
+                if (Character.isUpperCase(message.charAt(i))) {
+                    shifted = Character.toUpperCase(shifted);
+                }
+                encrypted.append(shifted);
+            } else if (ch == ' ') {
+                encrypted.append('$');
+            } else if (ch == '(') {
+                int endIndex = message.indexOf(')', i);
+                if (endIndex != -1) {
+                    String invertedText = message.substring(i + 1, endIndex);
+                    String processedInvertedText = processSpecialKey(invertedText);
+                    StringBuilder reversed = new StringBuilder(processedInvertedText).reverse();
+                    encrypted.append('(').append(reversed).append(')');
+                    i = endIndex;
+                } else {
+                    encrypted.append(ch);
+                }
+            } else {
+                encrypted.append(ch);
+            }
+        }
+
+        return encrypted.toString();
     }
 
     public String decrypt(String encryptedMessage) {
@@ -61,5 +97,22 @@ public class CaesarCipher {
 
 
         return formatted.toString();
+    }
+
+    private String processSpecialKey(String key) {
+        StringBuilder processedKey = new StringBuilder();
+        for (int i = 0; i < key.length(); i++) {
+            char ch = key.charAt(i);
+            if (Character.isLetter(ch)) {
+                if (Character.isUpperCase(ch)) {
+                    processedKey.append(Character.toLowerCase(ch));
+                } else {
+                    processedKey.append(Character.toUpperCase(ch));
+                }
+            } else {
+                processedKey.append(ch);
+            }
+        }
+        return processedKey.toString();
     }
 }
