@@ -1,6 +1,14 @@
 package com.example.fxfinal;
 
+import java.util.Scanner;
+
 public class CaesarCipher {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int choice = scanner.nextInt();
+        scanner.nextLine(); // Consume the newline character
+
+    }
     private int shift;
 
     public CaesarCipher(int shift) {

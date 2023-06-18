@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Stack;
 
 public class FoodHarvesting {
+
     // 10 by 10
     private int[][] adjacencyMatrix = {
         //   1, 2, 3, 4, 5, 6, 7, 8, 9, 10
@@ -25,6 +26,11 @@ public class FoodHarvesting {
     private Stack<Integer> path = new Stack<>();
     private List<Integer> bestPath = new ArrayList<>();
     private int noFoodNode;
+
+    public static void main(String[] args) {
+        FoodHarvesting FH = new FoodHarvesting(3);
+        FH.FindPath();
+    }
 
     public FoodHarvesting(int noFoodNode) {
         this.noFoodNode = noFoodNode;

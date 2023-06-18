@@ -1,53 +1,12 @@
 package com.example.fxfinal;
 
+
 import java.util.LinkedList;
 import java.util.List;
-import java.nio.file.Path;
 import java.util.Scanner;
 
-public class Main {
+public class KingdomHierarchyMain {
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-
-        System.out.println("Choose an encryption method:");
-        System.out.println("1. AES Encryption");
-        System.out.println("2. Caesar Cipher");
-
-        int choice = scanner.nextInt();
-        scanner.nextLine(); // Consume the newline character
-
-        if (choice == 1) {
-            System.out.print("Enter the secret key: ");
-            String secretKey = scanner.nextLine();
-
-            AESEncryption aesEncryption = new AESEncryption(secretKey);
-
-            System.out.print("Enter the message to encrypt: ");
-            String message = scanner.nextLine();
-
-            String encryptedMessage = aesEncryption.encrypt(message);
-            System.out.println("Encrypted message: " + encryptedMessage);
-
-            String decryptedMessage = aesEncryption.decrypt(encryptedMessage);
-            System.out.println("Decrypted message: " + decryptedMessage);
-        } else if (choice == 2) {
-            System.out.print("Enter the shift value: ");
-            int shift = scanner.nextInt();
-            scanner.nextLine();
-
-            CaesarCipher caesarCipher = new CaesarCipher(shift);
-
-            System.out.print("Enter the message to encrypt: ");
-            String message = scanner.nextLine();
-
-            String encryptedMessage = caesarCipher.encrypt(message);
-            System.out.println("Encrypted message: " + encryptedMessage);
-
-            String decryptedMessage = caesarCipher.decrypt(encryptedMessage);
-            System.out.println("Decrypted message: " + decryptedMessage);
-        } else {
-            System.out.println("Invalid choice. Exiting...");
-        }
 
         // persona
         Persona SunQuan = new Persona("Sun Quan", "Cavalry", 96, 98, 72, 77, 95);
@@ -85,11 +44,11 @@ public class Main {
         emperor.printList();
 
         //sorting the list by attribute
-        LinkedList<TreeNode> strength = sortingMethod.sortStrength(new LinkedList<>(newList));
-        LinkedList<TreeNode> leadership = sortingMethod.sortLeadership(new LinkedList<>(newList));
-        LinkedList<TreeNode> intelligence = sortingMethod.sortIntelligence(new LinkedList<>(newList));
-        LinkedList<TreeNode> politic = sortingMethod.sortPolitic(new LinkedList<>(newList));
-        LinkedList<TreeNode> hitpoint = sortingMethod.sortHitPoint(new LinkedList<>(newList));
+        LinkedList<TreeNode> strength = SortingMethod.sortStrength(new LinkedList<>(newList));
+        LinkedList<TreeNode> leadership = SortingMethod.sortLeadership(new LinkedList<>(newList));
+        LinkedList<TreeNode> intelligence = SortingMethod.sortIntelligence(new LinkedList<>(newList));
+        LinkedList<TreeNode> politic = SortingMethod.sortPolitic(new LinkedList<>(newList));
+        LinkedList<TreeNode> hitpoint = SortingMethod.sortHitPoint(new LinkedList<>(newList));
 
         //show the general after sorting by atributes
         System.out.println("Sort By Strength: ");
@@ -114,19 +73,19 @@ public class Main {
 
         switch(attributeName.toLowerCase()){
             case "strength":
-                searchResult = sortingMethod.searchGeneralByAttribute(strength, attributeName, attributeValue);
+                searchResult = SortingMethod.searchGeneralByAttribute(strength, attributeName, attributeValue);
                 break;
             case "intelligence":
-                searchResult = sortingMethod.searchGeneralByAttribute(intelligence, attributeName, attributeValue);
+                searchResult = SortingMethod.searchGeneralByAttribute(intelligence, attributeName, attributeValue);
                 break;
             case "leadership":
-                searchResult = sortingMethod.searchGeneralByAttribute(leadership, attributeName, attributeValue);
+                searchResult = SortingMethod.searchGeneralByAttribute(leadership, attributeName, attributeValue);
                 break;
             case "politic":
-                searchResult = sortingMethod.searchGeneralByAttribute(politic, attributeName, attributeValue);
+                searchResult = SortingMethod.searchGeneralByAttribute(politic, attributeName, attributeValue);
                 break;
             case "hitpoint":
-                searchResult = sortingMethod.searchGeneralByAttribute(hitpoint, attributeName, attributeValue);
+                searchResult = SortingMethod.searchGeneralByAttribute(hitpoint, attributeName, attributeValue);
                 break;
         }
 
@@ -158,48 +117,6 @@ public class Main {
         printTeam(PolTeam, "Politic");
 
 
-        int[][] matrix = {
-                {1, 1, 0, 0},
-                {1, 0, 0, 0},
-                {1, 0, 1, 1},
-                {1, 0, 0, 0}
-        };
-
-        BattleshipClusters BC = new BattleshipClusters();
-
-        int numClusters = BC.countBattleshipClusters(matrix);
-        System.out.println("Number of clusters: " + numClusters);
-
-        List<int[]> optimalCoordinates = BC.findOptimalCoordinates(matrix);
-        System.out.println("Optimal coordinates for fireball throwing:");
-
-        for (int[] coordinate : optimalCoordinates) {
-            System.out.println("[" + coordinate[0] + ", " + coordinate[1] + "]");
-        }
-
-        PathFinder PF = new PathFinder();
-
-        int[][] maze = {
-                {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
-                {2, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1},
-                {1, 0, 1, 1, 1, 0, 1, 0, 1, 0, 1, 1, 1},
-                {1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1},
-                {1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1},
-                {1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1},
-                {1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1},
-                {1, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1},
-                {1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1},
-                {1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 3},
-                {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}
-        };
-
-        boolean[][] currentPath = new boolean[maze.length][maze[0].length];
-
-        // Find the path
-        PF.findPath(maze, currentPath);
-
-        // Display the maze with the path
-        PF.displayMaze(maze, currentPath);
     }
 
     //assign the general can be as void but i return as list to kill two bird with one stone

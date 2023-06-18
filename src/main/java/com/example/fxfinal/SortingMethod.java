@@ -2,7 +2,7 @@ package com.example.fxfinal;
 
 import java.util.LinkedList;
 
-public class sortingMethod {
+public class SortingMethod {
 
     //sort strength by selection
     public static LinkedList<TreeNode> sortStrength(LinkedList<TreeNode> list) {
