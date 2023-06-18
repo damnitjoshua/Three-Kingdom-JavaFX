@@ -67,8 +67,8 @@ public class Main {
         };
 
         TreeNode emperor = new TreeNode(SunQuan);
-        TreeNode chiefMilitary = new TreeNode(ZhangZhao);
-        TreeNode chiefManagement = new TreeNode(ZhouYu);
+        TreeNode chiefMilitary = new TreeNode(ZhouYu);
+        TreeNode chiefManagement = new TreeNode(ZhangZhao);
 
         emperor.addChild(chiefMilitary);
         emperor.addChild(chiefManagement);
