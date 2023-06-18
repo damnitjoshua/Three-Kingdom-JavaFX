@@ -27,26 +27,30 @@ public class TextEncryptionMain {
             String decryptedMessage = aesEncryption.decrypt(encryptedMessage);
             System.out.println("Decrypted message: " + decryptedMessage);
         } else if (choice == 2) {
+            System.out.println("Choose an operation:");
+            System.out.println("1. Encrypt");
+            System.out.println("2. Decrypt");
+            int operation = scanner.nextInt();
+            scanner.nextLine();
+
             System.out.print("Enter the shift value: ");
             int shift = scanner.nextInt();
             scanner.nextLine();
 
             CaesarCipher caesarCipher = new CaesarCipher(shift);
 
-            System.out.print("Enter the message to encrypt: ");
+            System.out.print("Enter the message: ");
             String message = scanner.nextLine();
 
-            String encryptedMessage = caesarCipher.encrypt(message);
-            System.out.println("Encrypted message: " + encryptedMessage);
-
-            String decryptedMessage = caesarCipher.decrypt(encryptedMessage);
-            System.out.println("Decrypted message: " + decryptedMessage);
-
-            System.out.print("\nEnter the message to decrypt: ");
-            String demessage = scanner.nextLine();
-
-            String dMessage = caesarCipher.decrypt(demessage);
-            System.out.println("Decrypted message: " + dMessage);
+            if (operation == 1) {
+                String encryptedMessage = caesarCipher.encrypt(message);
+                System.out.println("Encrypted message: " + encryptedMessage);
+            } else if (operation == 2) {
+                String decryptedMessage = caesarCipher.decrypt(message);
+                System.out.println("Decrypted message: " + decryptedMessage);
+            } else {
+                System.out.println("Invalid operation. Exiting...");
+            }
         } else {
             System.out.println("Invalid choice. Exiting...");
         }
