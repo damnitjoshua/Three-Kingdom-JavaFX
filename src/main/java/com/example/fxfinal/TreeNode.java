@@ -25,20 +25,40 @@ class TreeNode {
     }
     
     public void printList() {
-        printHierarchy(this);
+        printHierarchy(this, 0);
     }
 
-    private void printHierarchy(TreeNode node) {
-        printGeneral(node.getGeneral());
+    private void printHierarchy(TreeNode node, int indentLevel) {
+        printGeneral(node.getGeneral(), indentLevel);
 
         for (TreeNode child : node.getChildren()) {
-            printHierarchy(child);
+            printHierarchy(child, indentLevel + 1);
         }
     }
 
-    private void printGeneral(Persona general) {
-        System.out.println(general.toString());
-    }    
+    private void printGeneral(Persona general, int indentLevel) {
+        printIndent(indentLevel);
+        System.out.println("Name: " + general.getName());
+        printIndent(indentLevel);
+        System.out.println("Army Type: " + general.getArmyType());
+        printIndent(indentLevel);
+        System.out.println("Strength: " + general.getStrength());
+        printIndent(indentLevel);
+        System.out.println("Leadership: " + general.getLeadership());
+        printIndent(indentLevel);
+        System.out.println("Intelligence: " + general.getIntelligence());
+        printIndent(indentLevel);
+        System.out.println("Politic: " + general.getPolitic());
+        printIndent(indentLevel);
+        System.out.println("Hit Points: " + general.getHitPoint());
+        System.out.println();
+    }
+
+    private void printIndent(int indentLevel) {
+        for (int i = 0; i < indentLevel; i++) {
+            System.out.print("\t"); // Use "\t" for indentation
+        }
+    }     
     
     @Override
     public String toString() {
